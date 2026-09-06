@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: securepilot
+  datasource:
+    url: ${SECUREPILOT_DB_URL:jdbc:mysql://localhost:3306/securepilot?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}
+    username: ${SECUREPILOT_DB_USERNAME:securepilot}
+    password: ${SECUREPILOT_DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+  jackson:
+    time-zone: UTC
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never

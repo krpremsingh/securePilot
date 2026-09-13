@@ -180,6 +180,10 @@ Lookup tables include:
 
 Use UUID foreign keys from business tables.
 
+The lookup table `id` is its primary key. The corresponding foreign-key column belongs on the business table. For example, `companies.company_status_id` references `company_statuses.id`.
+
+Some manually-created legacy tables may still contain `VARCHAR` fields such as `companies.status` or `users.role`. Those fields are transitional only: preserve them during a verified forward migration, backfill the lookup UUID foreign keys, and do not use the legacy fields in new application code.
+
 Examples:
 
 ```text
